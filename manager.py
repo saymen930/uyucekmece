@@ -1,9 +1,10 @@
-import requests
-from telethon.sync import TelegramClient
+import os
+import pickle
+import pyfiglet
+import random
+from colorama import Fore, init
 from telethon.errors.rpcerrorlist import PhoneNumberBannedError
-import pickle, pyfiglet
-from colorama import init, Fore
-import os, random
+from telethon.sync import TelegramClient
 from time import sleep
 
 init()
@@ -22,7 +23,6 @@ def banner():
     print(f'{random.choice(colors)}{banner}{n}')
     print(r+' Kusha Mühendislik'+n+'\n')
 
-
 def clr():
     if os.name == 'nt':
         os.system('cls')
@@ -31,16 +31,14 @@ def clr():
 
 while True:
     clr()
-    #print(r)
     banner()
-    #print(n)
     print(lg+'[1] Yeni Hesap Ekle'+n)
     print(lg+'[2] Banlı Hesapları Göster'+n)
     print(lg+'[3] Bütün Hesapları Göster'+n)
     print(lg+'[4] Bir Hesabı Sil'+n)
-    #print(lg+'[5] Update your Genisys'+n)
     print(lg+'[5] Çıkış')
     a = int(input(f'\nSeçiminizi Girin: {r}'))
+    
     if a == 1:
         with open('vars.txt', 'ab') as g:
             newly_added = []
@@ -64,7 +62,7 @@ while True:
                         c = TelegramClient(f'sessions/{added[2]}', added[0], added[1])
                         try:
                             c.start()
-                            print(f'n\n{lg}[+] Giriş Başarılı - {added[2]}')
+                            print(f'\n{lg}[+] Giriş Başarılı - {added[2]}')
                             c.disconnect()
                         except PhoneNumberBannedError:
                             print(f'{r}[!] {added[2]} Banlı! Bu Hesabı Çıkartın')
@@ -73,6 +71,7 @@ while True:
                     input(f'\n{lg}Lütfen Ana Menüye Dönün...')
                     break
         g.close()
+    
     elif a == 2:
         accounts = []
         banned_accs = []
@@ -115,6 +114,7 @@ while True:
                 k.close()
                 print(lg+'[i] Tüm Banlı Hesaplar Silindi'+n)
                 input('\nAna Menüye Gitmek İçin Enter Tuşuna Basınız')
+    
     elif a == 3:
         display = []
         j = open('vars.txt', 'rb')
@@ -162,6 +162,7 @@ while True:
         print(f'\n{lg}[+] Hesap Silindi{n}')
         input(f'{lg}Ana Menüye Gitmek İçin Enter Tuşuna Basınız{n}')
         f.close()
+    
     elif a == 5:
         clr()
         banner()
