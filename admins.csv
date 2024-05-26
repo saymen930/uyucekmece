@@ -1,6 +1,18 @@
-Kullanıcı adı (username)
-Kullanıcı ID'si (user id)
-Erişim anahtarı (access hash)
-Grup adı (group)
-Grup ID'si (group id)
-Kullanıcının durumu (status)
+import csv
+
+# Örnek admin verileri
+admins = [
+    {"username": "admin1", "user_id": 123456, "access_hash": "hash1", "group": "Group1", "group_id": 789},
+    {"username": "admin2", "user_id": 654321, "access_hash": "hash2", "group": "Group2", "group_id": 987}
+]
+
+# Dosya adı
+file_name = "admins.csv"
+
+# Verileri CSV dosyasına yazma
+with open(file_name, mode='w', newline='', encoding='utf-8') as file:
+    writer = csv.DictWriter(file, fieldnames=["username", "user_id", "access_hash", "group", "group_id"])
+    writer.writeheader()
+    writer.writerows(admins)
+
+print("admins.csv dosyası başarıyla oluşturuldu.")
