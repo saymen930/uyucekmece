@@ -1,0 +1,10 @@
+import csv
+
+# CSV dosyasını aç
+with open('members.csv', mode='r') as file:
+    # CSV dosyasını oku
+    csv_reader = csv.reader(file)
+    # Her bir satırı işle
+    for row in csv_reader:
+        # Satırı yazdır
+        print(row)
